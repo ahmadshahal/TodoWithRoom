@@ -1,4 +1,4 @@
-package com.hero.simpletodo.ui.addtask
+package com.hero.simpletodo.ui.addedittask
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Button
@@ -14,9 +14,9 @@ import androidx.navigation.NavController
 import com.hero.simpletodo.ui.taskslist.TasksListViewModel
 
 @Composable
-fun AddTaskScreen(
+fun AddEditTaskScreen(
     navController: NavController,
-    viewModel: AddTaskViewModel = hiltViewModel(),
+    addEditTaskViewModel: AddEditTaskViewModel = hiltViewModel(),
     tasksListViewModel: TasksListViewModel,
 ) {
     Scaffold {
@@ -28,9 +28,9 @@ fun AddTaskScreen(
             verticalArrangement = Arrangement.Center
         ) {
             TextField(
-                value = viewModel.titleTextFieldState.value,
+                value = addEditTaskViewModel.titleTextFieldState.value,
                 onValueChange = {
-                    viewModel.titleTextFieldState.value = it
+                    addEditTaskViewModel.titleTextFieldState.value = it
                 },
                 modifier = Modifier.fillMaxWidth(),
                 label = {
@@ -41,9 +41,9 @@ fun AddTaskScreen(
             )
             Spacer(modifier = Modifier.height(20.dp))
             TextField(
-                value = viewModel.descriptionTextFieldState.value,
+                value = addEditTaskViewModel.descriptionTextFieldState.value,
                 onValueChange = {
-                    viewModel.descriptionTextFieldState.value = it
+                    addEditTaskViewModel.descriptionTextFieldState.value = it
                 },
                 modifier = Modifier.fillMaxWidth(),
                 label = {
@@ -55,7 +55,7 @@ fun AddTaskScreen(
             Spacer(modifier = Modifier.height(20.dp))
             Button(
                 onClick = {
-                    viewModel.insert {
+                    addEditTaskViewModel.insert {
                         tasksListViewModel.refresh()
                     }
                     navController.popBackStack()

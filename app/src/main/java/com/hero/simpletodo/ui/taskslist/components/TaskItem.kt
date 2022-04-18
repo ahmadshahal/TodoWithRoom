@@ -1,5 +1,6 @@
 package com.hero.simpletodo.ui.taskslist.components
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Checkbox
 import androidx.compose.material.Icon
@@ -19,11 +20,12 @@ import com.hero.simpletodo.data.databases.entities.Task
 import com.hero.simpletodo.ui.taskslist.TasksListViewModel
 
 @Composable
-fun TaskItem(task: Task, viewModel: TasksListViewModel = hiltViewModel()) {
+fun TaskItem(task: Task, onClick: () -> Unit, viewModel: TasksListViewModel = hiltViewModel()) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(vertical = 10.dp),
+            .clickable { onClick() }
+            .padding(vertical = 10.dp, horizontal = 16.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
         Column(

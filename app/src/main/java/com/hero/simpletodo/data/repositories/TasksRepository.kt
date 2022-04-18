@@ -12,6 +12,9 @@ class TasksRepository @Inject constructor(private val tasksDb: AppDatabase) {
     suspend fun delete(task: Task) {
         tasksDb.tasksDao().delete(task)
     }
+    suspend fun getById(id: Int) : Task {
+        return tasksDb.tasksDao().getById(id)
+    }
     suspend fun getAll(): List<Task> {
         return tasksDb.tasksDao().getAll()
     }

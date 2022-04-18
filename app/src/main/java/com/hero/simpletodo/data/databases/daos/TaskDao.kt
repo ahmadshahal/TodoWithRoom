@@ -5,7 +5,7 @@ import com.hero.simpletodo.data.databases.entities.Task
 
 @Dao
 interface TaskDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(task: Task)
 
     @Delete
@@ -13,6 +13,9 @@ interface TaskDao {
 
     @Query("SELECT * FROM Task")
     suspend fun getAll() : List<Task>
+
+    @Query("SELECT * FROM Task WHERE id = :id")
+    suspend fun getById(id: Int) : Task
 
     @Update
     suspend fun update(task: Task)

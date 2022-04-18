@@ -22,18 +22,20 @@ fun TasksListScreen(viewModel: TasksListViewModel = hiltViewModel(), navControll
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate("/AddTaskScreen")
+                    navController.navigate("/AddEditTaskScreen/${-1}")
                 }
             ) {
                 Icon(imageVector = Icons.Rounded.Add, contentDescription = "")
             }
         }
     ) {
-        LazyColumn(contentPadding = PaddingValues(16.dp)) {
+        LazyColumn(contentPadding = PaddingValues(vertical = 16.dp)) {
             items(
                 viewModel.tasksListState.value
             ) { task ->
-                TaskItem(task = task)
+                TaskItem(
+                    task = task,
+                    onClick = { navController.navigate("/AddEditTaskScreen/${task.id}") })
             }
         }
     }

@@ -6,7 +6,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.hero.simpletodo.ui.addtask.AddTaskScreen
+import com.hero.simpletodo.ui.addedittask.AddEditTaskScreen
 import com.hero.simpletodo.ui.taskslist.TasksListScreen
 import com.hero.simpletodo.ui.taskslist.TasksListViewModel
 
@@ -17,12 +17,12 @@ fun Navigation() {
         composable("/TasksListScreen") {
             TasksListScreen(navController = navController)
         }
-        composable("/AddTaskScreen") {
+        composable("/AddEditTaskScreen/{taskId}") {
             val parentEntry = remember(it) {
                 navController.getBackStackEntry("/TasksListScreen")
             }
             val tasksListViewModel: TasksListViewModel = hiltViewModel(parentEntry)
-            AddTaskScreen(navController = navController, tasksListViewModel = tasksListViewModel)
+            AddEditTaskScreen(navController = navController, tasksListViewModel = tasksListViewModel)
         }
     }
 }
